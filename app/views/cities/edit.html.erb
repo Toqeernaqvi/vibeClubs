@@ -1,0 +1,16 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="form-box">
+        <%= simple_form_for @city do |f|%>
+  <%= f.input :name %>
+  <%= f.input :image %>
+  <%= f.association :country %>
+  <%= f.submit %>
+<% end %>
+      </div>
+    </div>
+  </div>
+</div>

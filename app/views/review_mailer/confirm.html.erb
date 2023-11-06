@@ -1,0 +1,18 @@
+<style>
+  .btn {
+    background-color: black;
+    border: 1px solid black;
+    padding: 15px 5px;
+    color: white;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+</style>
+
+
+<div style="text-align: center">
+  <p>Hey Thank you for your review!</p>
+  <p>In order to confirm it you simply need to click on the button below </p>
+  <%= link_to 'Confirm my review', review_url(@review), class: 'btn' %>
+</div>
+

@@ -1,0 +1,28 @@
+<div class="container my-5">
+  <h2>Cities in <%= @country.name %></h2>
+  <div class="row">
+    <% @cities.each do |city| %>
+        <div class="col-sm-12 col-lg-4">
+          <%= link_to city do  %>
+          <div class="card-country" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('<%= city.image %>')">
+            <h2 style="color: white;" class="card-title"><%= city.name %></h2>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+
+       <% if current_user && current_user.admin == true %>
+    <p class="ml-3">Page Visitor:  <b> <%=@country.page_visitor%> </b></p>
+    <% end %>
+
+  </div>
+  <%- if @current_user %>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <input type ="hidden" value='<%= @country.status %>' id="country-status">
+        <button class="btn btn-vibe-outline w-100" type="button" id="deactive-country">
+          <%= @country.status == "active" ? "Deactivate country" : "Activate country"%>
+        </button>
+    </div>
+  <%- end %>
+</div>

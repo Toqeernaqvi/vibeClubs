@@ -1,0 +1,12 @@
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-sm-12 col-lg-6 mx-auto">
+      <%= simple_form_for(@country) do |f| %>
+        <%= f.input :name, placeholder: 'Country name', label: false %>
+        <%= f.input :image, placeholder: 'Paste Image address', label: false %>
+        <%= f.submit class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+</div>

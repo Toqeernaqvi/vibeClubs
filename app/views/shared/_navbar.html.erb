@@ -1,0 +1,122 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
+    <a href="/" style="color: white;" class="navbar-brand">VIBE CLUBS</a>
+
+
+  <div class="" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <% if user_signed_in? %>
+        
+        <div class="dropdown">
+          <a class="btn btn-vibe dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            My account
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="position:absolute">
+            <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
+            <%= link_to "List a club", new_club_path, class: "dropdown-item" %>
+            <%= link_to 'Edit account', edit_user_registration_path, class: 'dropdown-item' %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="dropdown" >
+          <div class="dropbtn ml-4"> <i class="fas fa-bars fa-2x"  style = "margin-right:0px"></i></div>
+          <div class="dropdown-content">
+            <%= link_to 'Log in', new_user_session_path, class: 'dropdown-item' %>
+            <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
+          </div>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="modal fade" id="contact_us" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style = "border-radius: 10px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class ="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">    
+          <div class="modal-body text-center">
+            <%= form_tag(contact_us_path, method: "get") do %> 
+              <div class="form-group">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Please Enter Your name">
+              </div>
+              <div class="form-group">
+
+              <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter Your email">
+              </div>
+
+              <div class="form-group">
+                <textarea class="form-control" rows="5" id="content" name="content" placeholder= "Write your query"></textarea>
+              </div>
+              
+              <div>
+                <%= recaptcha_tags %> <!-- THIS -->
+              </div>
+
+              <button type="submit" class="btn btn-vibe">Submit</button>
+
+            <% end %>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="suggestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style = "border-radius: 10px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Sugest City and Country</h5>
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class ="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">    
+          <div class="modal-body">
+            <%= form_tag(suggestions_path, method: "post") do %> 
+              <div class="form-group">
+                <input type="text" class="form-control" id="city" name="city" placeholder="Please Enter City Name">
+              </div>
+              <div class="form-group">
+
+              <input type="text" class="form-control" id="country" name="country" placeholder="Please Enter Country Name">
+              </div>
+            
+              <button type="submit" class="btn btn-vibe">Submit</button>
+
+            <% end %>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

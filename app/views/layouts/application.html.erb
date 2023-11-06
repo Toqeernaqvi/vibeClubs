@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vibeclubs</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' , 'data-turbolinks-track': 'reload', defer: true %>
+    <%= javascript_include_tag 'application'%>
+    
+  </head>
+
+  <body>
+<%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+    <%= yield %>
+    <footer class="page-footer font-small blue pt-4" style="background: black; color: white; margin: 5% 0% 0% 0%;">
+
+      <!-- Footer Links -->
+      <div class="container-fluid text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-md-6 mt-md-0 mt-3">
+            <!-- Content -->
+            <h5 class="text-uppercase">Vibe Clubs</h5>
+          </div>
+          <hr />
+          <div class="col-md-6 mt-md-0 mt-3">
+            <!-- Content -->
+            <h5 class="bold" data-toggle="modal" data-target="#contact_us">Contact Us</h5>
+            
+            
+          </div>
+          
+        
+        
+        </div>
+        <!-- Grid row -->
+
+      </div>
+
+    </footer>
+
+  </body>
+</html>

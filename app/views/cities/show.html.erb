@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <a class="col-sm-12 col-lg-4" id="clubs" href='/city_clubs/<%= @city.id %>'>
+      <div class="card-country" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('https://images.unsplash.com/photo-1591173378221-27baab138161?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=882&q=80')">
+        <h2 style="color: white;" class="card-title">Clubs and Bars</h2>
+      </div>
+    </a>
+    <div class="col-sm-12 col-lg-4">
+      <div class="card-country" style="opacity: 0.5 ;background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')">
+        <div class = "row">
+          <h2 style="color: white;" class="card-title">Upcoming Events </br> <span style="color:red; font-size: 24px; margin-left: 19%;"> Coming Soon</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-4">
+      <div class="card-country" style="opacity: 0.5 ;background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('https://images.unsplash.com/photo-1528788923685-864db0cbc312?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=970&q=80')">
+        <h2 style="color: white;" class="card-title">Discover City </br> <span style="color:red; font-size: 24px; margin-left: 8%;"> Coming Soon</span></h2>
+      </div>
+    </div>
+
+     <% if current_user && current_user.admin == true %>
+    <p class="ml-3">Page Visitor:  <b> <%=@city.page_visitor%> </b></p>
+    <% end %>
+  </div>
+  <%- if @current_user %>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <input type ="hidden" value='<%= @city.status %>' id="city-status">
+        <button class="btn btn-vibe-outline w-100" type="button" id="deactive-city">
+          <%= @city.status == "active" ? "Deactivate city" : "Activate city"%>
+        </button>
+    </div>
+  <%- end %>
+  
+</div>

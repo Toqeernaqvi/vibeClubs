@@ -1,0 +1,212 @@
+<div class="row">
+    <div class="col-12">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <% @club.photos.each_with_index do |photo, index| %>
+            <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
+              <img src="<%= cl_image_path photo.key %>" class="d-block" alt="...">
+            </div>
+          <% end %>
+        </div>
+        <%# <div style="display: flex;flex-direction: row;justify-content: center;background-color: black;color: white;">
+          <p style="margin-bottom: 0px;">No image copyright infringement intended</p>
+        </div> %>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row my-2">
+    <div class="col-12 " style="position: relative">
+      <div class="d-flex justify-content-between">
+        <h2><%= @club.name %> </h2>
+        <p class="mr-4"><%= @club.city.name %></p>
+      </div>
+      <% 5.times do |x| %>
+        <i class="fa fa-star stars" style="color: <%= x < @club.average_rating ? '#f5bb1b' : 'grey'  %>;"></i>
+        <% end %>
+        <a href="#" data-toggle="modal" data-target="#review">
+          (<%= @club.reviews.count %> <%= 'Review'.pluralize(@club.reviews.count) %>)
+        </a>
+                 <!-- Button trigger modal -->
+      <button type="button" class="btn btn-sm btn-dark mr-3"  id="disclaimerModal" data-toggle="modal" data-target="#exampleModal1" style="position: absolute; right: 3px; top: 33px;" >
+        Disclaimer
+      </button>
+</div>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <ul>
+                <li>Vibe Clubs takes pride in ensuring that all information is accurate and updated regularly. However, each club/establishment may make changes to their policies/information so we would advise verifying all information with the respective establishments.</li>
+                <li>No image copyright infringements intended. All image rights and credits reserved to the respective owner(s).</li>
+                <li>Please use the ‘Contact Us’ form at the bottom of the web page to contact the admin with any queries.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <div class="col-12">
+      <hr>
+      <div class="club-info-banner">
+        <div>
+           <i class="ml-1 fas fa-map-marker-alt"></i>
+        </div>
+          <p> <a style="text-decoration: none;color: white;" target="_blank" href="<%= @club.address %>"> View Location</a></p>
+      </div>
+      <div class="club-info-banner">
+        <div>
+          <i class="fas fa-music"></i>
+        </div>
+         <p><%= @club.genre %></p>
+      </div>
+      <div class="club-info-banner">
+        <div>
+          <i class="fas fa-door-open"></i>
+        </div>
+         <p><%= @club.for_who %></p>
+      </div>
+      <div class="club-info-banner ">
+        <div>
+          <i class="fas fa-tshirt"></i>
+        </div>
+        <p><%= @club.dress_code %></p>
+      </div>
+      <div class="club-info-banner ">
+        <div>
+          <i class=" ml-1 far fa-clock"></i>
+        </div>
+        <p>From: <%= show_hours(@club.open_from) %> to: <%= show_hours(@club.closes_at) %></p>
+      </div>
+      <div class="club-info-banner">
+        <div>
+          <i class="ml-1 fas fa-calendar-alt"></i>
+        </div>
+
+        <p class="">
+          <% last = @club.day.count %>
+          <% @club.day.each_with_index do |d, index| %>
+            <%= d[0..2] %> <%= "-" unless index == 0 || index == last - 1%>
+          <% end %>
+        </p>
+      </div>
+      <div class="club-info-banner mx-auto">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/3159/3159491.png" style= "height: 50px;">
+        <p><%= @club.table_service == true ? 'VIP Table Service' : 'No VIP Table Service' %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-4">
+      <%= link_to @club.facebook do  %>
+        <i class="fab fa-facebook"></i>
+      <% end %>
+      </div>
+      <div class="col-4">
+        <%= link_to @club.instagram do  %>
+        <i class="fab fa-instagram"></i>
+        <% end %>
+      </div>
+      <div class="col-4">
+        <%= link_to @club.website do  %>
+        <i class="fas fa-globe"></i>
+      <% end %>
+      </div>
+  </div>
+
+  
+    <% if current_user && current_user.admin == true %>
+    <p class="ml-3">Page Visitor:  <b> <%=@club.page_visitor%> </b></p>
+    <% end %>
+ 
+
+  <hr>
+  <div class="row">
+      <div class="col-sm-12 col-lg-6 my-2">
+        <button type="button" class="btn btn-vibe-outline w-100" data-toggle="modal" data-target="#exampleModal">
+          Leave Review
+        </button><%= render 'shared/modal' %>
+      </div>
+      <%- if @current_user %>
+        <div class="col-sm-12 col-lg-6 my-2">
+          <input type ="hidden" value='<%= @club.status %>' id="club-status">
+          <button class="btn btn-vibe-outline w-100" type="button" id="deactive-club">
+            <%= @club.status == "active" ? "Deactivate club" : "Activate club"%>
+          </button>
+        </div>
+      <%- end %>
+  </div>
+  <div class="row ">
+    <div class="col-12 my-3">
+      <h2 class="heading-2">Similar Clubs</h2>
+    </div>
+    <% @similar.each do |club| %>
+      <div class="col-sm-12 col-lg-4">
+          <%= link_to club do  %>
+          <div class="card-club">
+            <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('<%= cl_image_path club.photos.first.key %>')">
+            </div>
+            <div class="card-description p-1 d-flex justify-content-between">
+              <h2 class="card-title"><%= club.name.truncate(9) %></h2>
+
+              <p class="m-2"><%= club.city.name %></p>
+            </div>
+            <p class="ml-1">
+                <% 5.times do |x| %>
+                  <i class="fa fa-star stars" style="color: <%= x < club.average_rating ? '#f5bb1b' : 'grey'  %>;"></i>
+                <% end %>
+              (<%= club.reviews.count %> <%= 'Review'.pluralize(club.reviews.count) %>)
+              </p>
+
+          </div>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="review" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style = "border-radius: 10px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">All reviews</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class ="row">
+        <div class="col-md-12">    
+          <div class="modal-body">
+            <% @club.reviews.each do |review| %>
+              <div class ="review_show" >
+                <h2><%= review.name %></h2>
+                <div style="margin: -13% 0px 33px 85%;">
+                  <i class="fa fa-star stars ml-3" style="color: #f5bb1b;"></i>
+                  <span style="color: #f5bb1b;"><%= review.stars %> </span>
+                </div>
+                <p><%= review.content %></p>
+                
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

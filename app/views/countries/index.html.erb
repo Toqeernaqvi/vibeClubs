@@ -1,0 +1,14 @@
+<div class="container">
+   <div class="row my-5">
+    <h2 class="col-12 heading-2">All Countries</h2>
+      <% @countries.each do |country| %>
+        <div class="col-sm-12 col-lg-4">
+          <%= link_to country do  %>
+          <div class="card-country" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('<%= country.image %>')">
+            <h2 style="color: white;" class="card-title"><%= country.name %></h2>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+  </div>
+</div>

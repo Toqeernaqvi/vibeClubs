@@ -1,0 +1,77 @@
+<div data-controller="field" class="container my-5">
+   <%= simple_form_for(@club) do |f| %>
+   <div class="form-row ">
+     <div class="col-sm-12 col-lg-8 mb-2">
+      <div class="form-box">
+         <%= f.input :name, label: false, placeholder: 'Club name' %>
+         <div class="form-row">
+           <div class="col-sm-12 col-lg-6">
+             <%= f.input :country_id, collection: Country.all.order(:name),label: false, :prompt=>"Select country", input_html: {'data-target': 'field.countries', 'data-action': 'change->field#changeField'} %>
+           </div>
+           <div class="col-sm-12 col-lg-6">
+           <%= f.input :city_id, collection: City.all.order(:name),label: false, :prompt=>"Select city", input_html: {'data-target': 'field.cities'} %>
+           </div>
+           <div class="col-8">
+             <%= f.input :address, label: false, placeholder: 'Google maps url' %>
+           </div>
+           <div class="col-4">
+             <%= link_to 'Maps', 'https://www.google.es/maps', class: 'btn btn-primary' ,target: "_blank" %>
+           </div>
+           <div class="col-sm-12 col-lg-6">
+             <%= f.input :for_who, collection: ['Guest List Entry', 'No Guest List'], include_blank: false, label: false  %>
+           </div>
+           <div class="col-sm-12 col-lg-6">
+            <%= f.input :table_service, input_html: {label: 'Vip Table Service'} %>
+           </div>
+            <div class="col-sm-12 col-lg-6">
+             <%= f.input :dress_code, label: false, include_blank: false, placeholder: 'Dress Code' %>
+           </div>
+           <div class="col-sm-12 col-lg-6">
+              <%= f.input :genre, label: false, placeholder: 'Music genres' %>
+            </div>
+            <div class="col-sm-12 col-lg-12">
+              <%= f.input :day, collection: ['Monday', 'Tuesday', 'Wednesday','Thursday', 'Friday', 'Saturday', 'Sunday'], label: false, input_html: {multiple: true, class: 'select2'}  %>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <%= f.input :open_from, collection: half_hours(),label: false, :prompt=>"Open from" %>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <%= f.input :closes_at, collection: half_hours(),label: false, :prompt=>"Closes at" %>
+            </div>
+
+           <div class="col-sm-12 col-lg-4">
+              <%= f.input :website, label: false, placeholder: 'Website url' %>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+              <%= f.input :instagram, label: false, placeholder: 'Instagram url' %>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+              <%= f.input :facebook, label: false, placeholder: 'Facebook url' %>
+            </div>
+            <div class="col-12 hidden">
+              <hr>
+              <%= f.input :photos, as: :file, input_html: { class: 'd-none', id: 'photo-input', multiple: true}, label_html: { class: 'upload-photo'}, label: '📷 Upload photos' %>
+              <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
+              <div id="photos-preview">
+
+              </div>
+            </div>
+            <div class="col-12">
+              <hr>
+              <%= f.submit 'Submit', class: 'btn btn-success w-100' %>
+            </div>
+         </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg">
+       <div class="form-box">
+         <h4>Some tips when uploading</h4>
+         <p>Please add a minimum of 5 high quality pictures of your club</p>
+         <p>Please include an area code with your phone number (e.g. +44 for the UK)</p>
+         <p>Please include music genres played e.g RnB, Dancehall, Afrobeats, Popular Music etc </p>
+         <p>Please specify any dress codes, otherwise please type ‘No Dress Code’ </p>
+       </div>
+     </div>
+<% end %>
+</div>
+</div>

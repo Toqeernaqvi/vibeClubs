@@ -1,0 +1,27 @@
+<div class="container my-5">
+  <div class="row">
+    <h2 class="col-12">Here are the clubs you have listed: </h2>
+    <% current_user.clubs.each do |club| %>
+        <div class="col-sm-12 col-lg-4">
+          <%= link_to club do  %>
+          <div class="card-club">
+            <div class="card-img p-2" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('<%= cl_image_path club.photos.first.key %>')">
+          </div>
+            <div class="card-description p-1 d-flex justify-content-between">
+              <h2 style="line-height: 1rem;"  class="mt-1 card-title"><%= club.name.truncate(14) %></h2>
+              <p class="m-2"><%= club.city.name %></p>
+            </div>
+            <p style="line-height: 0.1rem;" class="ml-1">
+                <% 5.times do |x| %>
+                  <i class="fa fa-star stars" style="color: <%= x < club.average_rating ? '#f5bb1b' : 'grey'  %>;"></i>
+                <% end %>
+              (<%= club.reviews.count %> <%= 'Review'.pluralize(club.reviews.count) %>)
+              </p>
+          </div>
+          <% end %>
+          <%= link_to 'Edit', edit_club_path(club), class: 'btn btn-warning' %>
+          <%= link_to 'Delete', club, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'  %>
+        </div>
+      <% end %>
+  </div>
+</div>

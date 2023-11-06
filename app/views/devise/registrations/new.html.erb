@@ -1,0 +1,52 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-sm-12 col-lg-6 mx-auto">
+      <div class="form-box">
+         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+          <div class="container">
+            <div class ="row">
+              <div class="col-xs-2">
+                <%= f.input :first_name %>
+              </div>
+            </div>
+            <div class ="row">
+              <div class="col-xs-2">
+                <%= f.input :last_name %>
+              </div>
+            </div>
+            <div class ="row">
+              <div class="col-xs-2">
+                  <%= f.input :email,
+                        required: true,
+                        input_html: { autocomplete: "email" }%>
+              </div>
+            </div>
+            <div class ="row">
+              <div class="col-xs-2">
+                <%= f.input :password,
+                        required: true,
+                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                        input_html: { autocomplete: "new-password" } %>
+              </div>
+            </div>
+            <div class ="row">
+              <div class="col-xs-2">
+                <%= f.input :password_confirmation,
+                        required: true,
+                        input_html: { autocomplete: "new-password" } %>
+              </div>
+            </div>
+            <div class="row form-actions text-center">
+              <div class="col-xs-2">
+                <%= f.button :submit, "Sign up", class: 'btn btn-vibe', style: 'width:175%' %>
+                <br>or <%= render "devise/shared/links" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
